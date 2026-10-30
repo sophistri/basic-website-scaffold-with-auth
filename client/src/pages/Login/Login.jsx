@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
+import PixelWindow from '../../components/PixelWindow';
+import PixelSprite, { HEART } from '../../components/PixelSprite';
 
 export default function Login() {
   const [form, setForm] = useState({ identifier: '', password: '' });
@@ -28,13 +30,17 @@ export default function Login() {
   };
 
   return (
-    <div className="auth-page">
-      <h2>Log in</h2>
+    <PixelWindow title="login.exe" className="auth-page">
+      <h2>
+        <PixelSprite {...HEART} px={3} />
+        Log in
+      </h2>
       <form onSubmit={handleSubmit} className="auth-form">
         <input
           name="identifier"
           type="text"
           placeholder="Email or username"
+          aria-label="Email or username"
           value={form.identifier}
           onChange={handleChange}
           required
@@ -44,12 +50,13 @@ export default function Login() {
           name="password"
           type="password"
           placeholder="Password"
+          aria-label="Password"
           value={form.password}
           onChange={handleChange}
           required
           className="auth-input"
         />
-        {error && <p className="auth-error">{error}</p>}
+        {error && <p className="auth-error" role="alert">{error}</p>}
         <button type="submit" className="auth-button" disabled={submitting}>
           {submitting ? 'Logging in...' : 'Log in'}
         </button>
@@ -57,6 +64,6 @@ export default function Login() {
       <p className="auth-footer">
         Don't have an account? <Link to="/signup">Sign up</Link>
       </p>
-    </div>
+    </PixelWindow>
   );
 }

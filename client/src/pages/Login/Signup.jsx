@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { signup } from '../../api/auth';
+import PixelWindow from '../../components/PixelWindow';
+import PixelSprite, { HEART } from '../../components/PixelSprite';
 
 export default function Signup() {
   const [form, setForm] = useState({ name: '', email: '', username: '', password: '' });
@@ -32,13 +34,17 @@ export default function Signup() {
   };
 
   return (
-    <div className="auth-page">
-      <h2>Sign up</h2>
+    <PixelWindow title="signup.exe" className="auth-page">
+      <h2>
+        <PixelSprite {...HEART} px={3} />
+        Sign up
+      </h2>
       <form onSubmit={handleSubmit} className="auth-form">
         <input
           name="name"
           type="text"
           placeholder="Name"
+          aria-label="Name"
           value={form.name}
           onChange={handleChange}
           required
@@ -48,6 +54,7 @@ export default function Signup() {
           name="email"
           type="email"
           placeholder="Email"
+          aria-label="Email"
           value={form.email}
           onChange={handleChange}
           required
@@ -57,6 +64,7 @@ export default function Signup() {
           name="username"
           type="text"
           placeholder="Username"
+          aria-label="Username"
           value={form.username}
           onChange={handleChange}
           required
@@ -68,13 +76,14 @@ export default function Signup() {
           name="password"
           type="password"
           placeholder="Password (min 8 characters)"
+          aria-label="Password, minimum 8 characters"
           value={form.password}
           onChange={handleChange}
           required
           minLength={8}
           className="auth-input"
         />
-        {error && <p className="auth-error">{error}</p>}
+        {error && <p className="auth-error" role="alert">{error}</p>}
         <button type="submit" className="auth-button" disabled={submitting}>
           {submitting ? 'Creating account...' : 'Sign up'}
         </button>
@@ -82,6 +91,6 @@ export default function Signup() {
       <p className="auth-footer">
         Already have an account? <Link to="/login">Log in</Link>
       </p>
-    </div>
+    </PixelWindow>
   );
 }

@@ -1,6 +1,31 @@
+/* Design tokens — palette from the warm "poppy / peach / herbs / indigo / violet"
+   board, plus lavender + pink from the pixel music-player and retro-OS refs. */
 :root {
   color-scheme: light;
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --ink: #3a2236;          /* dark outline, derived from Dulcet Violet */
+  --violet: #572f48;       /* Dulcet Violet */
+  --indigo: #4e4c5e;       /* Kachi Indigo */
+  --herbs: #817965;        /* Dried Herbs */
+  --poppy: #cf4a4d;        /* Valiant Poppy */
+  --mecca: #dc7668;        /* Mecca Orange */
+  --peach: #ffa67a;        /* Usugaki */
+  --lavender: #a5b4ff;
+  --lavender-soft: #dfe4ff;
+  --pink: #e58bc2;
+  --pink-soft: #f9d3ea;
+  --cream: #fff3e6;
+  --paper: #fffaf4;
+
+  --shadow: 6px 6px 0 var(--ink);
+  --shadow-sm: 4px 4px 0 var(--ink);
+
+  --font-display: 'Press Start 2P', 'Courier New', monospace;
+  --font-body: 'Pixelify Sans', 'Courier New', monospace;
+
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.45;
 }
 
 * {
@@ -9,6 +34,32 @@
 
 body {
   margin: 0;
-  background: #f7f7f8;
-  color: #1a1a1a;
+  min-height: 100vh;
+  color: var(--ink);
+  background-color: var(--cream);
+  /* dotted paper grid */
+  background-image: radial-gradient(rgba(87, 47, 72, 0.16) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
+}
+
+::selection {
+  background: var(--peach);
+  color: var(--ink);
+}
+
+a {
+  color: var(--poppy);
+  text-decoration: underline wavy;
+  text-underline-offset: 4px;
+}
+
+a:hover {
+  background: var(--pink-soft);
+}
+
+#root {
+  position: relative;
+  z-index: 1;
 }
